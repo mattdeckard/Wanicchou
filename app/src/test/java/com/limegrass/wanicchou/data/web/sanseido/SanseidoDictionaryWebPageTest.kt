@@ -8,15 +8,16 @@ import kotlin.test.asserter
 class SanseidoDictionaryWebPageTest {
     @Test
     fun buildQueryURL_SupportedMatchType(){
-        val webPage = SanseidoWebPage()
+        val webPage = SanseidoWebPage("http://fake.base.url/")
         val searchTerm = "テスト"
         val wordLanguageID = 1L
         val definitionLanguageID = 1L
-        val matchType = MatchType.WORD_STARTS_WITH
+        val matchType = MatchType.WORD_EQUALS
         val actual = webPage.buildQueryURL(searchTerm, wordLanguageID, definitionLanguageID, matchType)
-        val expected = "https://www.sanseido.biz/User/Dic/Index.aspx?st=1&TWords=テスト&DORDER=151716&DailyJJ=checkbox"
+        val expected = "http://fake.base.url/?st=1&TWords=%E3%83%86%E3%82%B9%E3%83%88&DORDER=151716&DailyJJ=checkbox"
         val message = "Expected: $expected, got $actual"
-        asserter.assertEquals(message, expected, actual)
+
+        asserter.assertEquals(message, expected, actual.toString())
     }
 
     @Test(expected = IllegalArgumentException::class)

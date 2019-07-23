@@ -12,8 +12,12 @@ import java.net.URL
 /**
  * Purpose: Implementation for a Jsoup web page
  */
-class SanseidoWebPage
+class SanseidoWebPage(baseUrl: String)
     : JsoupDictionaryWebPage() {
+
+    private var baseUrl = baseUrl
+
+    constructor() : this(SANSEIDO_BASE_URL)
 
     override val dictionaryID: Long
         get() = DICTIONARY_ID
@@ -95,7 +99,7 @@ class SanseidoWebPage
                                definitionLanguageID: Long,
                                matchType: MatchType): URL {
 
-        val uriBuilder = Uri.parse(SANSEIDO_BASE_URL).buildUpon()
+        val uriBuilder = Uri.parse(baseUrl).buildUpon()
         uriBuilder.setSearchType(matchType)
         uriBuilder.setSearchTerm(searchTerm)
         uriBuilder.setDictionaryOrder(DORDER_DEFAULT)
