@@ -223,7 +223,7 @@ class VocabularyRepository(application: Application) {
             }
             val vocabularyRelation = VocabularyRelation(vocabularyID,
                     relatedVocabularyID,
-                    matchType.getBitmask())
+                    matchType.id)
             database.vocabularyRelationDao().insert(vocabularyRelation)
         }
     }
@@ -257,7 +257,7 @@ class VocabularyRepository(application: Application) {
     }
 
     private fun getTemplateString(matchType: MatchType) : String {
-        val matchTypeID = matchType.getBitmask()
+        val matchTypeID = matchType.id
         return database.matchTypeDao()
                        .getTemplateString(matchTypeID)
     }
